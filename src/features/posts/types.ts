@@ -3,7 +3,6 @@ export type Post = {
   title: string;
   content: string;
   image: string;
-  thumbnail: string;
   publishedAt: string;
   userId: number;
 };
