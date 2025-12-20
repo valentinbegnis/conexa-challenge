@@ -1,10 +1,9 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type AppHeaderProps = {
-  icon: React.ComponentProps<typeof FontAwesome>['name'];
+  icon: React.ReactNode;
   title: string;
   subtitle: string;
   children?: React.ReactNode;
@@ -21,7 +20,7 @@ export function AppHeader({
       <View style={styles.container}>
         <View style={styles.topRow}>
           <View style={styles.iconContainer}>
-            <FontAwesome name={icon} size={18} color="#fff" />
+            {icon}
           </View>
 
           <View>

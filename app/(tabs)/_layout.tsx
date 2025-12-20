@@ -1,33 +1,25 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { AppHeader } from '@/components/header/AppHeader';
+import { HeartIcon } from '@/components/icons/HeartIcon';
+import { HomeIcon } from '@/components/icons/HomeIcon';
+import { StarIcon } from '@/components/icons/StarIcon';
+import { UsersIcon } from '@/components/icons/UsersIcon';
 import { Tabs } from 'expo-router';
 import React from 'react';
-
-import { AppHeader } from 'components/header/AppHeader';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: true,
+        headerShown: true
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
+          tabBarIcon: ({ color }) => <HomeIcon size={28} color={color} />,
           header: () => (
             <AppHeader
-              icon="star"
+              icon={<StarIcon size={20} color='#fff' />}
               title="Discover"
               subtitle="Your daily news digest"
             />
@@ -38,7 +30,7 @@ export default function TabLayout() {
         name="favorites"
         options={{
           title: 'Favorites',
-          tabBarIcon: ({ color }) => <TabBarIcon name="heart" color={color} />,
+          tabBarIcon: ({ color }) => <HeartIcon size={28} color={color} />,
           header: () => (
             <AppHeader
               icon="heart"
@@ -52,7 +44,7 @@ export default function TabLayout() {
         name="users"
         options={{
           title: 'Users',
-          tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+          tabBarIcon: ({ color }) => <UsersIcon size={28} color={color} />,
           header: () => (
             <AppHeader
               icon="users"
@@ -60,6 +52,13 @@ export default function TabLayout() {
               subtitle="0 active members"
             />
           )
+        }}
+      />
+      <Tabs.Screen
+        name="post/[id]"
+        options={{
+          href: null,
+          headerShown: false,
         }}
       />
     </Tabs>
