@@ -1,28 +1,45 @@
-import { StyleSheet } from 'react-native';
+import { PostCard } from '@/features/posts/components/PostCard';
+import { usePosts } from '@/features/posts/hooks/usePosts';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 
-import { Text, View } from '@/components/Themed';
+export default function HomeScreen() {
+  const { data, isLoading, isError, error, refetch } = usePosts();
 
-export default function TabOneScreen() {
+  if (isLoading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (isError) {
+    return (
+      <View style={styles.center}>
+        <Text>{error.message}</Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
-    </View>
+    <FlatList
+      contentContainerStyle={styles.list}
+      data={data}
+      keyExtractor={(item) => String(item.id)}
+      renderItem={({ item }) => <PostCard post={item} />}
+      showsVerticalScrollIndicator={false}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  list: {
+    padding: 16,
+  },
+
+  center: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    alignItems: 'center',
   },
 });
