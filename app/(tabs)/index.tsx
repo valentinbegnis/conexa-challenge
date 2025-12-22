@@ -4,6 +4,7 @@ import { PostCard } from '@/features/posts/components/PostCard';
 import { usePosts } from '@/features/posts/hooks/usePosts';
 import { Post } from '@/features/posts/types';
 import { useFavoritesStore } from '@/stores/favoritesStore';
+import { colors } from '@/theme/colors';
 import { useRouter } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 import {
@@ -69,7 +70,7 @@ export default function HomeScreen() {
   if (isLoading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     );
   }

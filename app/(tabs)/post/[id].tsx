@@ -50,7 +50,7 @@ export default function PostDetailScreen() {
   if (postsLoading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     );
   }
@@ -97,7 +97,7 @@ export default function PostDetailScreen() {
             <Pressable
               onPress={() => toggleFavorite(post.id)}
               style={styles.iconButton}
-              hitSlop={8}
+              hitSlop={10}
             >
               <HeartIcon
                 size={20}

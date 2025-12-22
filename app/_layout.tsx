@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import * as NavigationBar from 'expo-navigation-bar';
-import { Stack } from 'expo-router';
+import { Slot } from 'expo-router';
 import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
@@ -13,9 +13,7 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-      </Stack>
+      <Slot />
     </QueryClientProvider>
   );
 }

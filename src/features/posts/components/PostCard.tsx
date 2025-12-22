@@ -56,7 +56,7 @@ export function PostCard({ post, onPress, isFavorite }: PostProps) {
         <Pressable
           onPress={handleFavoritePress}
           style={styles.favoriteButton}
-          hitSlop={8}
+          hitSlop={10}
         >
           <HeartIcon
             size={18}

@@ -3,6 +3,7 @@ import { UserCard } from '@/features/users/components/UserCard';
 import { UsersHeader } from '@/features/users/components/UsersHeader';
 import { useUsers } from '@/features/users/hooks/useUsers';
 import { User } from '@/features/users/types';
+import { colors } from '@/theme/colors';
 import { useCallback } from 'react';
 import {
   ActivityIndicator,
@@ -36,7 +37,7 @@ export default function UsersScreen() {
   if (isLoading) {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color={colors.primary} />
       </View>
     );
   }

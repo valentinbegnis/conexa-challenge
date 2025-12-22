@@ -8,6 +8,7 @@ type AppHeaderProps = {
   icon: React.ReactNode;
   title: string;
   subtitle: string;
+  rightAction?: React.ReactNode;
   children?: React.ReactNode;
 };
 
@@ -15,30 +16,35 @@ export function AppHeader({
   icon,
   title,
   subtitle,
+  rightAction,
   children,
 }: AppHeaderProps) {
   return (
     <SafeAreaView edges={['top']} style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.topRow}>
-          <LinearGradient
-            colors={[colors.primary, colors.primarySoft]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.iconContainer}
-          >
-            {icon}
-          </LinearGradient>
+          <View style={styles.left}>
+            <LinearGradient
+              colors={[colors.primary, colors.primarySoft]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.iconContainer}
+            >
+              {icon}
+            </LinearGradient>
 
-          <View>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subtitle}</Text>
+            <View>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.subtitle}>{subtitle}</Text>
+            </View>
           </View>
+
+          {rightAction ? <View>{rightAction}</View> : null}
         </View>
 
         {children ? <View style={styles.extra}>{children}</View> : null}
       </View>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 
@@ -53,6 +59,12 @@ const styles = StyleSheet.create({
   },
 
   topRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  left: {
     flexDirection: 'row',
     alignItems: 'center',
   },
