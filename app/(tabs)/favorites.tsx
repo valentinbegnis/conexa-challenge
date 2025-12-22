@@ -1,8 +1,12 @@
+import { AppHeader } from '@/components/header/AppHeader';
+import { HeartIcon } from '@/components/icons/HeartIcon';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { PostCard } from '@/features/posts/components/PostCard';
 import { usePosts } from '@/features/posts/hooks/usePosts';
+import { Post } from '@/features/posts/types';
 import { useFavoritesStore } from '@/stores/favoritesStore';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useRouter } from 'expo-router';
+import { useCallback, useMemo } from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -14,9 +18,38 @@ import {
 export default function FavoritesScreen() {
   const router = useRouter();
 
-  const { data: posts, isLoading, isError } = usePosts();
+  const { data: posts, isLoading, error, isError } = usePosts();
+
   const favoritePostIds = useFavoritesStore(
     (state) => state.favoritePostIds
+  );
+
+  const favoritePosts = useMemo(() => {
+    if (!posts?.length || !favoritePostIds.length) return [];
+    return posts.filter((post) => favoritePostIds.includes(post.id));
+  }, [posts, favoritePostIds]);
+
+  const handlePressPost = useCallback(
+    (id: number) => {
+      router.push({
+        pathname: '/post/[id]',
+        params: { id, from: 'favorites' },
+      });
+    },
+    [router]
+  );
+
+  const renderItem = useCallback(
+    ({ item }: { item: Post }) => (
+      <View style={styles.itemWrapper}>
+        <PostCard
+          post={item}
+          isFavorite
+          onPress={() => handlePressPost(item.id)}
+        />
+      </View>
+    ),
+    [handlePressPost]
   );
 
   if (isLoading) {
@@ -27,96 +60,54 @@ export default function FavoritesScreen() {
     );
   }
 
-  if (isError || !posts) {
+  if (isError) {
     return (
       <View style={styles.center}>
-        <Text>Failed to load favorites</Text>
-      </View>
-    );
-  }
-
-  const favoritePosts = posts.filter((post) =>
-    favoritePostIds.includes(post.id)
-  );
-
-  // 🧡 EMPTY STATE
-  if (favoritePosts.length === 0) {
-    return (
-      <View style={styles.emptyContainer}>
-        <View style={styles.emptyIcon}>
-          <FontAwesome name="heart-o" size={32} color="#F97316" />
-        </View>
-
-        <Text style={styles.emptyTitle}>No favorites yet</Text>
-        <Text style={styles.emptySubtitle}>
-          Tap the heart icon on any article to save it here for later reading
-        </Text>
+        <Text>{error.message}</Text>
       </View>
     );
   }
 
   return (
     <FlatList
-      contentContainerStyle={styles.list}
-      showsVerticalScrollIndicator={false}
       data={favoritePosts}
       keyExtractor={(item) => String(item.id)}
-      renderItem={({ item }) => (
-        <PostCard
-          post={item}
-          isFavorite
-          onPress={() =>
-            router.push({
-              pathname: '/post/[id]',
-              params: { id: item.id },
-            })
-          }
+      renderItem={renderItem}
+      showsVerticalScrollIndicator={false}
+      ListHeaderComponent={
+        <View style={styles.headerWrapper}>
+          <AppHeader
+            icon={<HeartIcon size={20} color='#fff' />}
+            title="Favorites"
+            subtitle="Your saved articles"
+          />
+        </View>
+      }
+      ListEmptyComponent={
+        <EmptyState
+          iconName='heart-o'
+          title='No favorites yet'
+          subtitle='Tap the heart icon on any article to save it here for later reading'
         />
-      )}
+      }
     />
   );
 }
 
 const styles = StyleSheet.create({
-  list: {
-    padding: 16,
+  headerWrapper: {
+    marginBottom: 24,
+  },
+
+  itemWrapper: {
+    paddingHorizontal: 16,
+    paddingBottom: 8,
   },
 
   center: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  emptyContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 32,
-  },
-
-  emptyIcon: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: '#FFF1E6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
-  },
-
-  emptyTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    color: '#111827',
-    marginBottom: 8,
-  },
-
-  emptySubtitle: {
-    fontSize: 14,
-    color: '#6B7280',
-    textAlign: 'center',
-    lineHeight: 20,
-  },
+  }
 });
 

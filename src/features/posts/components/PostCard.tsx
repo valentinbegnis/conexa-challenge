@@ -1,10 +1,10 @@
 import { useFavoritesStore } from '@/stores/favoritesStore';
 import { formatPublishedDate } from '@/utils/date';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import {
-  Image,
   Pressable,
   StyleSheet,
   Text,
@@ -31,7 +31,12 @@ export function PostCard({ post, onPress, isFavorite }: PostProps) {
   return (
     <Pressable style={styles.card} onPress={onPress}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri: post.image }} style={styles.image} />
+        <Image
+          source={post.image}
+          style={styles.image}
+          contentFit='cover'
+          transition={200}
+        />
 
         <LinearGradient
           colors={['transparent', 'rgba(0,0,0,0.5)']}
@@ -86,9 +91,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     overflow: 'hidden',
     elevation: 4,
-    shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
   },
 
   imageContainer: {
