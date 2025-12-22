@@ -4,6 +4,7 @@ import { HomeIcon } from '@/components/icons/HomeIcon';
 import { StarIcon } from '@/components/icons/StarIcon';
 import { UsersIcon } from '@/components/icons/UsersIcon';
 import { TabIconWithBadge } from '@/components/ui/TabIconWithBadge';
+import { UsersHeader } from '@/features/users/components/UsersHeader';
 import { useFavoritesStore } from '@/stores/favoritesStore';
 import { Tabs } from 'expo-router';
 import React from 'react';
@@ -55,13 +56,7 @@ export default function TabLayout() {
         options={{
           title: 'Users',
           tabBarIcon: ({ color }) => <UsersIcon size={28} color={color} />,
-          header: () => (
-            <AppHeader
-              icon={<UsersIcon size={20} color='#fff' />}
-              title="Community"
-              subtitle="0 active members"
-            />
-          )
+          header: () => <UsersHeader />,
         }}
       />
       <Tabs.Screen

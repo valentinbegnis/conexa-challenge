@@ -15,5 +15,7 @@ export async function getUsers(): Promise<User[]> {
     id: user.id,
     firstname: user.firstname,
     lastname: user.lastname,
+    email: user.email,
+    phone: user.phone,
   }));
 }

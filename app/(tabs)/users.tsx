@@ -1,26 +1,51 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { UserCard } from '@/features/users/components/UserCard';
+import { useUsers } from '@/features/users/hooks/useUsers';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
-export default function TabTwoScreen() {
+export default function UsersScreen() {
+  const { data: users, isLoading, isError } = useUsers();
+
+  if (isLoading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  if (isError || !users) {
+    return (
+      <View style={styles.center}>
+        <Text>Failed to load users</Text>
+      </View>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Users</Text>
-    </View>
+    <FlatList
+      data={users}
+      keyExtractor={(item) => String(item.id)}
+      contentContainerStyle={styles.list}
+      showsVerticalScrollIndicator={false}
+      renderItem={({ item }) => <UserCard user={item} />}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  list: {
+    padding: 16,
+  },
+
+  center: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });
