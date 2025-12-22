@@ -3,10 +3,16 @@ import { HeartIcon } from '@/components/icons/HeartIcon';
 import { HomeIcon } from '@/components/icons/HomeIcon';
 import { StarIcon } from '@/components/icons/StarIcon';
 import { UsersIcon } from '@/components/icons/UsersIcon';
+import { TabIconWithBadge } from '@/components/ui/TabIconWithBadge';
+import { useFavoritesStore } from '@/stores/favoritesStore';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
 export default function TabLayout() {
+  const favoriteCount = useFavoritesStore(
+    (state) => state.favoritePostIds.length
+  );
+
   return (
     <Tabs
       screenOptions={{
@@ -30,12 +36,16 @@ export default function TabLayout() {
         name="favorites"
         options={{
           title: 'Favorites',
-          tabBarIcon: ({ color }) => <HeartIcon size={28} color={color} />,
+          tabBarIcon: ({ color }) => (
+            <TabIconWithBadge count={favoriteCount}>
+              <HeartIcon size={28} color={color} />
+            </TabIconWithBadge>
+          ),
           header: () => (
             <AppHeader
-              icon="heart"
+              icon={<HeartIcon size={20} color='#fff' />}
               title="Favorites"
-              subtitle="0 saved articles"
+              subtitle="Your saved articles"
             />
           )
         }}
@@ -47,7 +57,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <UsersIcon size={28} color={color} />,
           header: () => (
             <AppHeader
-              icon="users"
+              icon={<UsersIcon size={20} color='#fff' />}
               title="Community"
               subtitle="0 active members"
             />

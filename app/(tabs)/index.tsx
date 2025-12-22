@@ -1,5 +1,6 @@
 import { PostCard } from '@/features/posts/components/PostCard';
 import { usePosts } from '@/features/posts/hooks/usePosts';
+import { useFavoritesStore } from '@/stores/favoritesStore';
 import { useRouter } from 'expo-router';
 import {
   ActivityIndicator,
@@ -12,6 +13,10 @@ import {
 export default function HomeScreen() {
   const router = useRouter();
   const { data: posts, isLoading, isError, error } = usePosts();
+
+  const favoritePostIds = useFavoritesStore(
+    (state) => state.favoritePostIds
+  );
 
   if (isLoading) {
     return (
@@ -38,6 +43,7 @@ export default function HomeScreen() {
       renderItem={({ item }) => (
         <PostCard
           post={item}
+          isFavorite={favoritePostIds.includes(item.id)}
           onPress={() =>
             router.push({
               pathname: '/post/[id]',

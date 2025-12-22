@@ -13,6 +13,7 @@ import {
 
 import { usePost } from '@/features/posts/hooks/usePost';
 import { useUsers } from '@/features/users/hooks/useUsers';
+import { useFavoritesStore } from '@/stores/favoritesStore';
 import { formatPublishedDate } from '@/utils/date';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -26,6 +27,14 @@ export default function PostDetailScreen() {
   const { data: post, isLoading: postsLoading, isError: postsError } = usePost(postId);
   const { data: users, isLoading: usersLoading, isError: usersError } = useUsers();
   const author = users?.find(u => u.id === post?.userId);
+
+  const toggleFavorite = useFavoritesStore(
+    (state) => state.toggleFavorite
+  );
+
+  const favorite = useFavoritesStore(
+    (state) => state.favoritePostIds.includes(postId)
+  );
 
   if (postsLoading) {
     return (
@@ -74,8 +83,16 @@ export default function PostDetailScreen() {
             <Pressable style={styles.iconButton}>
               <FontAwesome name="share-alt" size={20} color="#14181f" />
             </Pressable>
-            <Pressable style={styles.iconButton}>
-              <FontAwesome name="heart-o" size={20} color="#14181f" />
+            <Pressable
+              onPress={() => toggleFavorite(post.id)}
+              style={styles.iconButton}
+              hitSlop={8}
+            >
+              <FontAwesome
+                name={favorite ? 'heart' : 'heart-o'}
+                size={20}
+                color={favorite ? '#F97316' : '#14181f'}
+              />
             </Pressable>
           </View>
         </View>

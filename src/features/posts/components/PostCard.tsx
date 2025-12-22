@@ -1,3 +1,4 @@
+import { useFavoritesStore } from '@/stores/favoritesStore';
 import { formatPublishedDate } from '@/utils/date';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -11,13 +12,22 @@ import {
 } from 'react-native';
 import { Post } from '../types';
 
-type Props = {
+type PostProps = {
   post: Post;
   onPress?: () => void;
   isFavorite?: boolean;
 };
 
-export function PostCard({ post, onPress, isFavorite }: Props) {
+export function PostCard({ post, onPress, isFavorite }: PostProps) {
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
+
+  const handleFavoritePress = (
+    event: React.MouseEvent | any
+  ) => {
+    event.stopPropagation?.();
+    toggleFavorite(post.id);
+  };
+
   return (
     <Pressable style={styles.card} onPress={onPress}>
       <View style={styles.imageContainer}>
@@ -34,18 +44,20 @@ export function PostCard({ post, onPress, isFavorite }: Props) {
           end={{ x: 1, y: 0 }}
           style={styles.category}
         >
-          <Text style={styles.categoryText}>
-            Featured
-          </Text>
+          <Text style={styles.categoryText}>Featured</Text>
         </LinearGradient>
 
-        <View style={styles.favoriteButton}>
+        <Pressable
+          onPress={handleFavoritePress}
+          style={styles.favoriteButton}
+          hitSlop={8}
+        >
           <FontAwesome
             name={isFavorite ? 'heart' : 'heart-o'}
             size={16}
             color="#fff"
           />
-        </View>
+        </Pressable>
 
         <View style={styles.overlay}>
           <Text style={styles.title} numberOfLines={2}>
