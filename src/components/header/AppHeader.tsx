@@ -1,3 +1,4 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -19,9 +20,14 @@ export function AppHeader({
     <SafeAreaView edges={['top']} style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.topRow}>
-          <View style={styles.iconContainer}>
+          <LinearGradient
+            colors={['#ff6600', '#ffa01aff']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.iconContainer}
+          >
             {icon}
-          </View>
+          </LinearGradient>
 
           <View>
             <Text style={styles.title}>{title}</Text>
@@ -54,7 +60,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 14,
-    backgroundColor: '#F97316',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,

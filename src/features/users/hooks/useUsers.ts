@@ -6,6 +6,6 @@ export function useUsers() {
   return useQuery<User[]>({
     queryKey: ['users'],
     queryFn: getUsers,
-    staleTime: 1000 * 60 * 10, // 10 minutes
+    staleTime: 1000 * 60 * 10,
   });
 }

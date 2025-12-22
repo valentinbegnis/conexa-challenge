@@ -1,3 +1,4 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -12,11 +13,16 @@ export function TabIconWithBadge({ children, count }: Props) {
       {children}
 
       {count && count > 0 ? (
-        <View style={styles.badge}>
+        <LinearGradient
+          colors={['#ff6600', '#ffa01aff']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.badge}
+        >
           <Text style={styles.badgeText}>
             {count > 99 ? '99+' : count}
           </Text>
-        </View>
+        </LinearGradient>
       ) : null}
     </View>
   );
@@ -32,12 +38,11 @@ const styles = StyleSheet.create({
 
   badge: {
     position: 'absolute',
-    top: -6,
-    right: -10,
+    top: -2,
+    right: -8,
     minWidth: 18,
     height: 18,
     borderRadius: 9,
-    backgroundColor: '#F97316',
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 4,

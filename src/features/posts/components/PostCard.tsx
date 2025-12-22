@@ -1,6 +1,6 @@
+import { HeartIcon } from '@/components/icons/HeartIcon';
 import { useFavoritesStore } from '@/stores/favoritesStore';
 import { formatPublishedDate } from '@/utils/date';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
@@ -57,10 +57,10 @@ export function PostCard({ post, onPress, isFavorite }: PostProps) {
           style={styles.favoriteButton}
           hitSlop={8}
         >
-          <FontAwesome
-            name={isFavorite ? 'heart' : 'heart-o'}
-            size={16}
+          <HeartIcon
+            size={18}
             color="#fff"
+            variant={isFavorite ? 'filled' : 'outline'}
           />
         </Pressable>
 
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 16,
     right: 16,
-    backgroundColor: 'rgba(0,0,0,0.45)',
+    backgroundColor: 'rgba(0,0,0,0.3)',
     width: 44,
     height: 44,
     borderRadius: 22,

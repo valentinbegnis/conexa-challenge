@@ -1,7 +1,7 @@
 import Svg, { Path, Rect } from 'react-native-svg';
 import { IconProps } from "./types";
 
-const EnvelopeIcon = ({ size = 24, color = '#111' }: IconProps) => (
+export const EnvelopeIcon = ({ size = 24, color = '#111' }: IconProps) => (
   <Svg
     width={size}
     height={size}
@@ -16,4 +16,3 @@ const EnvelopeIcon = ({ size = 24, color = '#111' }: IconProps) => (
     <Path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
   </Svg>
 );
-export default EnvelopeIcon;

@@ -1,5 +1,5 @@
-import EnvelopeIcon from '@/components/icons/EnvelopeIcon';
-import PhoneIcon from '@/components/icons/PhoneIcon';
+import { EnvelopeIcon } from '@/components/icons/EnvelopeIcon';
+import { PhoneIcon } from '@/components/icons/PhoneIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View } from 'react-native';
 import { User } from '../types';

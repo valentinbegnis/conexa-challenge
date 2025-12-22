@@ -14,22 +14,31 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false
+        headerShown: false,
+        tabBarActiveTintColor: '#F97316',
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '500',
+        },
+        tabBarStyle: {
+          borderTopWidth: 1,
+          paddingTop: 4,
+        },
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => <HomeIcon size={28} color={color} />,
+          tabBarIcon: ({ color, size }) => <HomeIcon size={size} color={color} />,
         }}
       />
       <Tabs.Screen
         name="favorites"
         options={{
           title: 'Favorites',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color, size }) => (
             <TabIconWithBadge count={favoriteCount}>
-              <HeartIcon size={28} color={color} />
+              <HeartIcon size={size} color={color} />
             </TabIconWithBadge>
           ),
         }}
@@ -38,7 +47,7 @@ export default function TabLayout() {
         name="users"
         options={{
           title: 'Users',
-          tabBarIcon: ({ color }) => <UsersIcon size={28} color={color} />,
+          tabBarIcon: ({ color, size }) => <UsersIcon size={size} color={color} />,
         }}
       />
       <Tabs.Screen

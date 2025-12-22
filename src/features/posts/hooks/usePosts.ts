@@ -7,6 +7,5 @@ export function usePosts() {
     queryKey: ['posts'],
     queryFn: getPosts,
     staleTime: 1000 * 60 * 10,
-    gcTime: 1000 * 60 * 30,
   });
 }

@@ -11,10 +11,14 @@ import {
   View
 } from 'react-native';
 
+import { BackArrowIcon } from '@/components/icons/BackArrowIcon';
+import { HeartIcon } from '@/components/icons/HeartIcon';
+import { ShareIcon } from '@/components/icons/ShareIcon';
 import { usePost } from '@/features/posts/hooks/usePost';
 import { useUsers } from '@/features/users/hooks/useUsers';
 import { useFavoritesStore } from '@/stores/favoritesStore';
 import { formatPublishedDate } from '@/utils/date';
+import { Share } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function PostDetailScreen() {
@@ -35,6 +39,12 @@ export default function PostDetailScreen() {
   const favorite = useFavoritesStore(
     (state) => state.favoritePostIds.includes(postId)
   );
+
+  const handleShare = async () => {
+    await Share.share({
+      message: `📰 ${post?.title}\n\nRead on Conexa News:\nconexa://post/${post?.id}`,
+    });
+  };
 
   if (postsLoading) {
     return (
@@ -76,22 +86,22 @@ export default function PostDetailScreen() {
           { top: insets.top + 8 },
         ]}>
           <Pressable onPress={() => router.back()} style={styles.iconButton}>
-            <FontAwesome name="long-arrow-left" size={20} color="#14181f" />
+            <BackArrowIcon size={20} color="#14181f" />
           </Pressable>
 
           <View style={styles.rightActions}>
-            <Pressable style={styles.iconButton}>
-              <FontAwesome name="share-alt" size={20} color="#14181f" />
+            <Pressable onPress={handleShare} style={styles.iconButton}>
+              <ShareIcon size={20} color="#14181f" />
             </Pressable>
             <Pressable
               onPress={() => toggleFavorite(post.id)}
               style={styles.iconButton}
               hitSlop={8}
             >
-              <FontAwesome
-                name={favorite ? 'heart' : 'heart-o'}
+              <HeartIcon
                 size={20}
                 color={favorite ? '#F97316' : '#14181f'}
+                variant={favorite ? 'filled' : 'outline'}
               />
             </Pressable>
           </View>
