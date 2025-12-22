@@ -17,6 +17,7 @@ import { ShareIcon } from '@/components/icons/ShareIcon';
 import { usePost } from '@/features/posts/hooks/usePost';
 import { useUsers } from '@/features/users/hooks/useUsers';
 import { useFavoritesStore } from '@/stores/favoritesStore';
+import { colors } from '@/theme/colors';
 import { formatPublishedDate } from '@/utils/date';
 import { Share } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -75,7 +76,7 @@ export default function PostDetailScreen() {
           colors={[
             'transparent',
             '#f9fafb3c',
-            '#F9FAFB',
+            colors.background,
           ]}
           locations={[0, 0.5, 1]}
           style={styles.bottomFade}
@@ -86,12 +87,12 @@ export default function PostDetailScreen() {
           { top: insets.top + 8 },
         ]}>
           <Pressable onPress={() => router.back()} style={styles.iconButton}>
-            <BackArrowIcon size={20} color="#14181f" />
+            <BackArrowIcon size={20} color={colors.textPrimary} />
           </Pressable>
 
           <View style={styles.rightActions}>
             <Pressable onPress={handleShare} style={styles.iconButton}>
-              <ShareIcon size={20} color="#14181f" />
+              <ShareIcon size={20} color={colors.textPrimary} />
             </Pressable>
             <Pressable
               onPress={() => toggleFavorite(post.id)}
@@ -100,7 +101,7 @@ export default function PostDetailScreen() {
             >
               <HeartIcon
                 size={20}
-                color={favorite ? '#F97316' : '#14181f'}
+                color={favorite ? colors.primary : colors.textPrimary}
                 variant={favorite ? 'filled' : 'outline'}
               />
             </Pressable>
@@ -111,7 +112,7 @@ export default function PostDetailScreen() {
       <View style={styles.card}>
         <View style={styles.metaRow}>
           <LinearGradient
-            colors={['#ff6600', '#ffa01aff']}
+            colors={[colors.primary, colors.primarySoft]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.category}
@@ -120,7 +121,7 @@ export default function PostDetailScreen() {
           </LinearGradient>
 
           <View style={styles.readTime}>
-            <FontAwesome name="clock-o" size={14} color="#6B7280" />
+            <FontAwesome name="clock-o" size={14} color={colors.textSecondary} />
             <Text style={styles.readTimeText}>5 min read</Text>
           </View>
         </View>
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
 
   scroll: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: colors.background,
   },
 
   scrollContent: {
@@ -221,7 +222,7 @@ const styles = StyleSheet.create({
   },
 
   iconButton: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     width: 40,
     height: 40,
     borderRadius: 14,
@@ -233,10 +234,10 @@ const styles = StyleSheet.create({
   card: {
     marginTop: -60,
     marginHorizontal: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     borderRadius: 16,
     padding: 24,
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOpacity: 0.1,
     shadowRadius: 12,
     elevation: 10,
@@ -244,12 +245,12 @@ const styles = StyleSheet.create({
 
   authorSkeleton: {
     fontSize: 14,
-    color: '#9CA3AF',
+    color: colors.textMuted,
   },
 
   authorFallback: {
     fontSize: 14,
-    color: '#6B7280',
+    color: colors.textSecondary,
     fontStyle: 'italic',
   },
 
@@ -260,14 +261,14 @@ const styles = StyleSheet.create({
   },
 
   category: {
-    backgroundColor: '#F97316',
+    backgroundColor: colors.primary,
     paddingHorizontal: 12,
     paddingVertical: 4,
     borderRadius: 12,
   },
 
   categoryText: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 12,
     fontWeight: '600',
   },
@@ -280,14 +281,14 @@ const styles = StyleSheet.create({
 
   readTimeText: {
     fontSize: 12,
-    color: '#6B7280',
+    color: colors.textSecondary,
   },
 
   title: {
     fontSize: 24,
     fontWeight: '800',
     marginBottom: 16,
-    color: '#111827',
+    color: colors.textPrimary,
   },
 
   authorRow: {
@@ -300,13 +301,13 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#F97316',
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   avatarText: {
-    color: '#fff',
+    color: colors.white,
     fontWeight: '700',
   },
 
@@ -317,12 +318,12 @@ const styles = StyleSheet.create({
 
   date: {
     fontSize: 12,
-    color: '#6B7280',
+    color: colors.textSecondary,
   },
 
   divider: {
     height: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: colors.border,
     marginVertical: 24,
   },
 

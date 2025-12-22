@@ -3,6 +3,7 @@ import { HomeIcon } from '@/components/icons/HomeIcon';
 import { UsersIcon } from '@/components/icons/UsersIcon';
 import { TabIconWithBadge } from '@/components/ui/TabIconWithBadge';
 import { useFavoritesStore } from '@/stores/favoritesStore';
+import { colors } from '@/theme/colors';
 import { Tabs } from 'expo-router';
 import React from 'react';
 
@@ -15,7 +16,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#F97316',
+        tabBarActiveTintColor: colors.primary,
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: '500',

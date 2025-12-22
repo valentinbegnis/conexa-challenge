@@ -1,6 +1,7 @@
 import { AppHeader } from '@/components/header/AppHeader';
 import { UsersIcon } from '@/components/icons/UsersIcon';
 import { useUsers } from '@/features/users/hooks/useUsers';
+import { colors } from '@/theme/colors';
 
 export function UsersHeader() {
   const { data: users, isLoading, isError } = useUsers();
@@ -17,7 +18,7 @@ export function UsersHeader() {
 
   return (
     <AppHeader
-      icon={<UsersIcon size={20} color="#fff" />}
+      icon={<UsersIcon size={20} color={colors.white} />}
       title="Community"
       subtitle={subtitle}
     />

@@ -1,5 +1,6 @@
 import { HeartIcon } from '@/components/icons/HeartIcon';
 import { useFavoritesStore } from '@/stores/favoritesStore';
+import { colors } from '@/theme/colors';
 import { formatPublishedDate } from '@/utils/date';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -44,7 +45,7 @@ export function PostCard({ post, onPress, isFavorite }: PostProps) {
         />
 
         <LinearGradient
-          colors={['#ff6600', '#ffa01aff']}
+          colors={[colors.primary, colors.primarySoft]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={styles.category}
@@ -59,7 +60,7 @@ export function PostCard({ post, onPress, isFavorite }: PostProps) {
         >
           <HeartIcon
             size={18}
-            color="#fff"
+            color={colors.white}
             variant={isFavorite ? 'filled' : 'outline'}
           />
         </Pressable>
@@ -86,7 +87,7 @@ export function PostCard({ post, onPress, isFavorite }: PostProps) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     borderRadius: 20,
     marginBottom: 20,
     overflow: 'hidden',
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
   },
 
   categoryText: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 12,
     fontWeight: '600',
   },
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#FFFFFF',
+    color: colors.white,
     lineHeight: 26,
   },
 
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
 
   description: {
     fontSize: 14,
-    color: '#6B7280',
+    color: colors.textSecondary,
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -167,14 +168,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 
-  author: {
-    fontSize: 13,
-    color: '#374151',
-    fontWeight: '600',
-  },
-
   date: {
     fontSize: 13,
-    color: '#9CA3AF',
+    color: colors.textMuted,
   },
 });

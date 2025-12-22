@@ -1,3 +1,4 @@
+import { colors } from '@/theme/colors';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -16,7 +17,7 @@ export function EmptyState({
   return (
     <View style={styles.container}>
       <View style={styles.iconContainer}>
-        <FontAwesome name={iconName} size={32} color="#F97316" />
+        <FontAwesome name={iconName} size={32} color={colors.primary} />
       </View>
 
       <Text style={styles.title}>{title}</Text>
@@ -48,14 +49,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#111827',
+    color: colors.textPrimary,
     marginBottom: 8,
     textAlign: 'center',
   },
 
   subtitle: {
     fontSize: 14,
-    color: '#6B7280',
+    color: colors.textSecondary,
     textAlign: 'center',
     lineHeight: 20,
   },

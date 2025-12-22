@@ -1,7 +1,8 @@
+import { colors } from '@/theme/colors';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { IconProps } from "./types";
 
-export const EnvelopeIcon = ({ size = 24, color = '#111' }: IconProps) => (
+export const EnvelopeIcon = ({ size = 24, color = colors.textPrimary }: IconProps) => (
   <Svg
     width={size}
     height={size}

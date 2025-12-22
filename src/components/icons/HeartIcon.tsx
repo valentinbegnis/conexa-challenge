@@ -1,9 +1,10 @@
+import { colors } from '@/theme/colors';
 import Svg, { Path } from 'react-native-svg';
 import { IconProps } from './types';
 
 type HeartIconProps = IconProps & { variant?: 'filled' | 'outline' }
 
-export const HeartIcon = ({ size = 24, color = '#111', variant = 'outline' }: HeartIconProps) => (
+export const HeartIcon = ({ size = 24, color = colors.textPrimary, variant = 'outline' }: HeartIconProps) => (
   <Svg
     width={size}
     height={size}

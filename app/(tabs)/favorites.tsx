@@ -5,6 +5,7 @@ import { PostCard } from '@/features/posts/components/PostCard';
 import { usePosts } from '@/features/posts/hooks/usePosts';
 import { Post } from '@/features/posts/types';
 import { useFavoritesStore } from '@/stores/favoritesStore';
+import { colors } from '@/theme/colors';
 import { useRouter } from 'expo-router';
 import { useCallback, useMemo } from 'react';
 import {
@@ -77,7 +78,7 @@ export default function FavoritesScreen() {
       ListHeaderComponent={
         <View style={styles.headerWrapper}>
           <AppHeader
-            icon={<HeartIcon size={20} color='#fff' />}
+            icon={<HeartIcon size={20} color={colors.white} />}
             title="Favorites"
             subtitle="Your saved articles"
           />

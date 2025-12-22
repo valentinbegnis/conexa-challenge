@@ -1,5 +1,6 @@
 import { AppHeader } from '@/components/header/AppHeader';
 import { StarIcon } from '@/components/icons/StarIcon';
+import { colors } from '@/theme/colors';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import React from 'react';
 import { StyleSheet, TextInput, View } from 'react-native';
@@ -12,15 +13,15 @@ type Props = {
 export function HomeHeader({ value, onChangeText }: Props) {
   return (
     <AppHeader
-      icon={<StarIcon size={20} color="#fff" />}
+      icon={<StarIcon size={20} color={colors.white} />}
       title="Discover"
       subtitle="Your daily news digest"
     >
       <View style={styles.searchContainer}>
-        <FontAwesome name="search" size={16} color="#9CA3AF" />
+        <FontAwesome name="search" size={16} color={colors.textMuted} />
         <TextInput
           placeholder="Search by title or content..."
-          placeholderTextColor="#9CA3AF"
+          placeholderTextColor={colors.textMuted}
           value={value}
           onChangeText={onChangeText}
           style={styles.input}
@@ -35,18 +36,18 @@ const styles = StyleSheet.create({
     marginTop: 8,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: colors.white,
     borderRadius: 14,
     paddingHorizontal: 12,
     height: 44,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.border,
   },
 
   input: {
     flex: 1,
     marginLeft: 8,
     fontSize: 14,
-    color: '#111827',
+    color: colors.textPrimary,
   },
 });

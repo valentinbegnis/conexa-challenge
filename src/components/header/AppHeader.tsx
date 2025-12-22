@@ -1,3 +1,4 @@
+import { colors } from '@/theme/colors';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -21,7 +22,7 @@ export function AppHeader({
       <View style={styles.container}>
         <View style={styles.topRow}>
           <LinearGradient
-            colors={['#ff6600', '#ffa01aff']}
+            colors={[colors.primary, colors.primarySoft]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
             style={styles.iconContainer}
@@ -43,12 +44,12 @@ export function AppHeader({
 
 const styles = StyleSheet.create({
   safeArea: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: colors.background,
   },
 
   container: {
     padding: 16,
-    backgroundColor: '#F9FAFB',
+    backgroundColor: colors.background,
   },
 
   topRow: {
@@ -68,12 +69,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: '700',
-    color: '#111827',
+    color: colors.textPrimary,
   },
 
   subtitle: {
     fontSize: 13,
-    color: '#6B7280',
+    color: colors.textSecondary,
     marginTop: 2,
   },
 

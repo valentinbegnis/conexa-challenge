@@ -1,3 +1,4 @@
+import { colors } from '@/theme/colors';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -14,7 +15,7 @@ export function TabIconWithBadge({ children, count }: Props) {
 
       {count && count > 0 ? (
         <LinearGradient
-          colors={['#ff6600', '#ffa01aff']}
+          colors={[colors.primary, colors.primarySoft]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
           style={styles.badge}
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
   },
 
   badgeText: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 11,
     fontWeight: '700',
   },
