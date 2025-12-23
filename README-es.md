@@ -1,3 +1,5 @@
+👉 [Ir a la versión en inglés](./README.md)
+
 # Conexa Challenge – React Native Developer
 
 **Aplicación mobile desarrollada con React Native y Expo** como parte del challenge técnico de Conexa.

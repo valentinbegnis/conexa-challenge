@@ -1,3 +1,5 @@
+👉 [Go to Spanish version](./README-es.md)
+
 # Conexa Challenge – React Native Developer
 
 **React Native mobile application built with Expo** as part of the Conexa technical challenge.
