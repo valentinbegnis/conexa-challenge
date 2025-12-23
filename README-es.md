@@ -43,7 +43,7 @@ npx expo start
 
 ### Obtención de datos y caching
 
-La aplicación utiliza ** React Query (TanStack Query)** para obtener datos desde la **API pública JSONPlaceholder**.
+La aplicación utiliza **React Query (TanStack Query)** para obtener datos desde la **API pública JSONPlaceholder**.
 
 Fuentes de datos:
 
